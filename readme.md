@@ -63,3 +63,18 @@ Cart Domain model을 수정해야한다.
 - 역시 제일 먼저 Cart.test.tsx 수정
 
 - Cart.tsx 수정
+
+## refactoring & upgrade
+
+- Cart.ts
+
+- Cart.test.ts
+  테스트도 좀 더 케이스가 좋게 만듬.
+
+## 요점 정리
+
+Store는 비즈니스 로직의 진입점이다.
+
+실질적인 비즈니스 로직은 도메인 모델 쪽에서 처리된다.
+
+ui 테스트가 아닌 비즈니스 로직에 대한 테스트를 작성한다.

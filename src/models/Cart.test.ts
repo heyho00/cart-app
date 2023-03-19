@@ -1,4 +1,5 @@
 import Cart from "./Cart";
+import Item from "./Item";
 
 const context = describe;
 
@@ -11,25 +12,34 @@ describe("Cart", () => {
 
   context("같은 상품이 장바구니에 없을때", () => {
     it("adds an item", () => {
-      cart = cart.addItem({ productId: 1, quantity: 1 });
+      const productIds = [1, 2, 3];
 
-      expect(cart.items).toHaveLength(1);
+      cart = productIds.reduce(
+        (prevCart, productId) => prevCart.addItem({ productId, quantity: 1 }),
+        cart
+      );
 
-      cart = cart.addItem({ productId: 2, quantity: 1 });
-
-      expect(cart.items).toHaveLength(2);
+      expect(cart.items).toHaveLength(3);
     });
   });
 
   context("같은 상품이 장바구니에 있을때", () => {
     it("adds an item", () => {
-      cart = cart.addItem({ productId: 1, quantity: 1 });
+      const productId = 1;
+      const quantities = [1, 2, 3];
 
+      cart = quantities.reduce(
+        (prevCart, quantity) => prevCart.addItem({ productId, quantity }),
+        cart
+      );
       expect(cart.items).toHaveLength(1);
-
-      cart = cart.addItem({ productId: 1, quantity: 1 });
-
-      expect(cart.items).toHaveLength(1);
+      expect(cart.items).toEqual([
+        new Item({
+          id: 1,
+          productId,
+          quantity: quantities.reduce((a, b) => a + b),
+        }),
+      ]);
     });
   });
 });

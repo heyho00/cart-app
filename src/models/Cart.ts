@@ -14,25 +14,42 @@ export default class Cart {
   addItem({ productId, quantity }: { productId: number; quantity: number }) {
     const index = this.items.findIndex((i) => i.productId === productId);
 
-    if (index < 0) {
-      //insert Item
-      const id = Math.max(0, ...this.items.map((i) => i.id)) + 1;
-      const item = new Item({ id, productId, quantity });
+    return index < 0
+      ? this.insertItem({ productId, quantity })
+      : this.updateItem({ index, change: quantity });
+  }
 
-      return new Cart({
-        items: [...this.items, item],
-      });
-    }
+  private insertItem({
+    productId,
+    quantity,
+  }: {
+    productId: number;
+    quantity: number;
+  }): Cart {
+    //insert Item
+    const id = Math.max(0, ...this.items.map((i) => i.id)) + 1;
+    const item = new Item({ id, productId, quantity });
+
+    return new Cart({
+      items: [...this.items, item],
+    });
+  }
+
+  private updateItem({
+    index,
+    change,
+  }: {
+    index: number;
+    change: number;
+  }): Cart {
     //update Item
     const item = this.items[index];
     return new Cart({
       items: [
         ...this.items.slice(0, index),
-        new Item({ ...item, quantity: item.quantity + quantity }),
+        new Item({ ...item, quantity: item.quantity + change }),
         ...this.items.slice(index + 1),
       ],
     });
   }
 }
-
-// 도메인 모델이라고 함.
