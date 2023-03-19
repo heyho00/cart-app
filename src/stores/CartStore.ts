@@ -1,4 +1,10 @@
 import Cart from "../models/Cart";
+import Item from "../models/Item";
+
+// useCartStore 에서 쓰기 때문에 정의해줌.
+export type CartStoreSnapshot = {
+  items: Item[];
+};
 
 export default class CartStore {
   listeners = new Set<() => void>();
@@ -26,12 +32,18 @@ export default class CartStore {
   addItem({ productId, quantity }: { productId: number; quantity: number }) {
     this.cart = this.cart.addItem({ productId, quantity });
 
-    // 상태를 저장하고
-    // 변경을 알린다.   두 가지 로직이 필요.
+    // 기존 takeSnapshot, publish 따로 있던걸 한꺼번체 실행시키는 update 함수
+    this.update();
+  }
 
+  update() {
+    this.takeSnapshot();
+    this.publish();
+  }
+
+  takeSnapshot() {
     this.snapshot = {
       items: this.cart.items,
     };
-    this.publish();
   }
 }
