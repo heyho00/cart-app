@@ -53,3 +53,13 @@ react component와 도메인 모델을 연결해주기 위해선 store가 필요
 초기값이 없기 때문 ;
 
 - CartStore에 constructor로 this.takeSnapshot() 전달해 state 초기화.
+
+## 같은 상품 선택 시 계속 늘어나버림
+
+quantity만 늘어나게 하고싶음.
+
+Cart Domain model을 수정해야한다.
+
+- 역시 제일 먼저 Cart.test.tsx 수정
+
+- Cart.tsx 수정
