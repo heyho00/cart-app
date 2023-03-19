@@ -1,6 +1,10 @@
 # Cart app
 
-커밋으로 정리. 순서대로 보면 됨.
+[FECONF 2022 [B5] 상태관리 이 전쟁을 끝내러 왔다](https://www.youtube.com/watch?v=KEDUqA9JeIo)
+
+를 정리했음.
+
+커밋 순서대로 보면 됨.
 
 ## Cart 도메인 모델 작성
 
