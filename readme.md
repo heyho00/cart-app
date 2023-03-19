@@ -47,3 +47,9 @@ react component와 도메인 모델을 연결해주기 위해선 store가 필요
 1. Store로 기반 클래스를 뺐다.
 
 2. CartStore는 확 줄었다.
+
+## 왜 UI 가 정상적으로 안뜰까!?
+
+초기값이 없기 때문 ;
+
+- CartStore에 constructor로 this.takeSnapshot() 전달해 state 초기화.
